@@ -1,0 +1,40 @@
+﻿@model List<SageworksTasksManager.Controllers.Task>
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <p>Add a task:</p>
+
+    <form action="@Url.Action("Add")" method="POST">
+        <input type="text" class="input-lg col-xs-12" name="task"/>
+    </form>
+</div>
+
+<h3>@Model.Count() Task(s)</h3>
+<table class="table">
+    <tr>
+        <th>Description</th>
+        <th>Due Date</th>
+        <th>Link</th>
+    </tr>
+    <tbody>
+    @foreach (var task in Model)
+    {
+        <tr>
+            <td>
+                @task.Description
+            </td>
+            <td>
+                @(task.DueDate.HasValue ? @task.DueDate.Value.ToShortDateString() : "")
+            </td>
+            <td>
+                <a target="_blank" href="@task.Link">@task.Link</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+<img style="width: 250px" src="https://cdn.sageworks.com/images/logos/sageworks_og_logo.jpg" />
